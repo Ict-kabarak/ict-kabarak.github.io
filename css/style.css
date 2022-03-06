@@ -13,6 +13,10 @@ body {
 nav {
   background: #fff !important;
 }
+#logo{
+  width: 40px;
+  height: auto;
+}
 hr {
   margin-top: 0 !important;
 }
