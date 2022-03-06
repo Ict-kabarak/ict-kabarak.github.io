@@ -2,115 +2,202 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ICT CLUB</title>
-    <style>
-        body{
-            text-align: center;
-            text-indent: 2%; 
-        }
-        .logo {
-            background: url("../../img/logo.png"); 
-            background-repeat: no-repeat;
-            background-size: cover; 
-            border-radius: 50%;
-            width: 160px;
-            height: 160px;
-            margin: 20px auto;
-
-        }
-
-        label {
-            font-style: bold;
-            font-size: 1.1rem;
-            font-family: arial-black, monospace;
-        }
-        ul{
-            list-style: none;
-            
-        }
-
-        #user {
-            text-align: center;
-        }
-
-        .container {
-            width: 80%;
-            max-width: 300px;
-            margin: 10px auto;
-        }
-
-        .allow_button {
-            width: 100%;
-            text-align: center;
-        }
-
-        details {
-            font-size: 15px;
-        }
-
-        li {
-            font-size: 14px;
-           align-items: flex-start;
-            display: flexbox;
-        }
-
-        p {
-            font-size: 11px;
-            color: #cccccc;
-        }
-
-        .allow {
-            padding: 10px;
-            width: 70%;
-            max-width: 15rem;
-            color: white;
-            background: hsl(256, 80%, 58%);
-            border: none;
-            border-radius: 1.2rem;
-            user-select: none;
-        }
-        .allow:hover{
-            opacity: .7;
-        }
-        .allow:active{
-            transform: scale(.9);
-        }
-    </style>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css" />
+    <script src="lib/jquery/jquery.js"></script>
+    <script src="lib/vue/vue.js"></script>
+    <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+    <title>ICT Discord Learning</title>
 </head>
 
 <body>
-    <h1> The Website is undergoing Maintainance</h1>
-<!--     <div class="logo"></div>
-    <div class="container">
-        <div id="user">
-            <h3>ICT CLUB <br></h3>
-        </div>
-        <label for="request">welcome to Kabarak ICT Discord invite website</label>
-        <ul>
-       
-                <summary>what we will do</summary>
-                <hr>
-                <li>lern to code</li>
-                <li>discuss about programming</li>
-                <li>collaborate on projects</li>
-  
+    <div id="app">
+        <nav class="navbar sticky-top navbar-expand-md py-2 navbar-light">
+            <a @click.prevent="updateType(1)" href="index.html">
+                <img title="logo" src="img/logo.png" alt="ICT" />
+            </a>
+            <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
+                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse justify-content-right collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav w-100 ml-auto mr-1">
+                    <a class="mx-2 py-1" href="http://" title="discord invitation link">discord</a>
+                    <a class="mx-2 py-1" href="http://" title="github repository">github</a>
+                    <a @click.prevent="updateType(2)" v-if="user==0" class="mx-2 py-1"  title="you are not registered" href="#">register</a>
+                    <a @click.prevent="updateType(3)" v-if="user!=null" class="mx-2 py-1" title="you are registered" href="#">{{user.username}}</a>
+                </ul>
+            </div>
+        </nav>
+        <hr />
+        <header></header>
+        <main>
+            <div class="main">
+                <div v-show="type==2" class="comp n1 row">
+                    <div class="col-md-6 my-5 py-3 ">
+                        <form @submit.prevent="register" action="#" class="shadow w-75 p-3 rounded form-group mx-auto "
+                            method="post">
+                            <h2>Register</h2>
+                            <input type="text" id="adm" class="p-1 my-1 w-100 rounded"
+                                placeholder="admission Number.... " title="Your admission number" minlength="4"
+                                maxlength="5" autofocus />
+                            <input type="text" id="fname" class="p-1 my-1 w-100 rounded" placeholder="First name..."
+                                title="Your First name" />
+                            <input type="text" id="lname" class="p-1 my-1 w-100 rounded" placeholder="Second name..."
+                                title="Your Second name" />
+                            <input type="text" id="user" class="p-1 my-1 w-100 rounded" placeholder="Username..."
+                                title="Your Username" />
+                            <input type="password" id="pwd" class="p-1 my-1 w-100 rounded" placeholder="password..."
+                                title="Your password" />
+                            <div class="row">
+                                <div class="btn-group col-8 "><button class="py-1 btn w-50  btn-outline-primary my-1"
+                                        type="submit">send</button></div>
 
-        </ul><br /><br />
-        <br />
-        <p>click the button to join</p>
-        <div class="allow_button">
-            <a href="#"><button class="allow" onclick="sorry()">Join discord</button></a>
-        </div>
-    </div> -->
-<!-- <script>
-    function sorry(params) {
-        alert('the url is currently unavalable. contact admin')
-    }
-    
-</script> -->
+                                <span class="col-3 text-center py-2">or <a href="#login">login</a></span>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-6 my-5 py-3 ">
+                        <form @submit.prevent="login" action="#" id="login"
+                            class="shadow w-75 p-3 rounded form-group mx-auto " method="post">
+                            <h1>Login</h1>
+                            <input type="text" class="p-1 my-1 w-100 rounded" placeholder="Username..."
+                                title="Your Username" />
+                            <input type="password" class="p-1 my-1 w-100 rounded" placeholder="password..."
+                                title="Your password" />
+                            <div class="row">
+                                <div class="btn-group col-6 "><button class="py-1 btn w-50  btn-outline-primary my-1"
+                                        type="submit">send</button></div>
+                                <span class="col-6 text-center py-2"><a @click.prevent="forgotPwd" href="#">forgot password</a></span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div v-show="type==1" class="comp n2 row my-4 py-2text-center">
+                <div class="image col-md-6">
+                    <img id="study-img" class="w-100" src="img/Study-online.svg" alt="study online" srcset="" />
+                </div>
+                <div class="info text-center col-md-6">
+                    <h1>Let's Code</h1>
+                    <br />
+                    <h2>ICT Club Kabarak</h2>
+                    <p class="px-3">
+                        ICT club is focused on the sharing of computer skills, ideas and
+                        knowledge to all.<br />
+                        <span class="underline">Let's build amaizing things together.</span>
+                    </p>
+                    <br />
+                    <h6>
+                        Join our discord server and get access to plenty of developer
+                        resources.
+                    </h6>
+                    <a href="#" target="_blank" rel="noopener noreferrer"><button title="discord server invitation link" class="butn btn">Join
+                            Discord</button></a>
+                </div>
+            </div>
+            <div v-show="type==3" class="comp n3">
+                <br>
+                <div class="card p-4 text-center w-75 mx-auto">
+                    <h1>You are Registered</h1>
+                    <div class="row p-3 my-1">
+                        <label class="col-4" for="name">Name:</label>
+                        <input class="col-8 w-75" id="name" placeholder="name.." :value="user.name" type="text"
+                            readonly>
+                    </div>
+                    <div class="row p-3 my-1">
+                        <label class="col-4" for="adm">Admission No:</label>
+                        <input class="col-8 w-75" id="adm" placeholder="admission no.." :value="user.adm" type="text"
+                            readonly>
+                    </div>
+                    <div class="row p-3 my-1">
+                        <label class="col-4" for="adm">Username:</label>
+                        <input class="col-8 w-75" id="adm" placeholder="username.." :value="user.username" type="text"
+                            readonly>
+                    </div>
+                    <button class="btn btn-danger offset-3 col-4">delete</button>
+                </div>
+
+            </div>
+    </div>
+    </main>
+    <footer>
+        <ul class="list row">
+            <a href="" title="about us">
+                <li>about</li>
+            </a>
+            <a href="" title="view our licence">
+                <li>license</li>
+            </a>
+            <a href="https://github.com/ict-kabarak/ict-kabarak.github.io" title="edit any info  this page">
+                <li>edit website</li>
+            </a>
+            <a href="mailto:bethropolis@gmail.com" title="contact admin">
+                <li>contact</li>
+            </a>
+        </ul>
+    </footer>
+    </div>
+    <script>
+        const app = new Vue({
+            el: "#app",
+            data: {
+                type: 3,
+                id: localStorage.getItem('token') || null,
+                user: [],
+                URL: ''
+            },
+            methods: {
+                updateType: function (num) {
+                    this.type = num;
+                },
+                updateId: function (token) {
+                    this.id =  token;
+                },
+                signup: function () {
+                    const details = {
+                        adm: $('#adm').val(),
+                        fname: $('#fname').val(),
+                        lname: $('#lname').val(),
+                        user: $('#user').val(),
+                        pwd: $('#pwd').val()
+                    }
+                    $.post(this.url + '?register', details, function (data) {
+                        localStorage.setItem('token', data.token);
+                    });
+                    this.updateId(localStorage.getItem(token));
+                },
+                login: function () {
+                    const details = {
+                        user: $('#user').val(),
+                        pwd: $('#pwd').val()
+                    }
+                    $.post(this.url + '?login', details, function (data) {
+                        localStorage.setItem('token', data.token);
+                    });
+                    this.updateId(localStorage.getItem(token));
+                },
+                forgotPwd: function (params) {
+                    alert('please contact admin');
+                }
+
+
+            },
+            watch: {
+                id: function () {
+                    if (this.id) {
+                        $.get(this.url + "?t=" + this.id, function (data) {
+                            this.user = data;
+                        })
+                    }
+                }
+            },
+        });
+    </script>
 </body>
 
 </html>

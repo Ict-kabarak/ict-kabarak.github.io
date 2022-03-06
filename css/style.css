@@ -1,0 +1,46 @@
+:root {
+  --bg: #f6f4f6;
+  --co: #1f1f1f;
+  --fo: Arial, Helvetica, sans-serif;
+}
+
+body {
+  background: var(--bg);
+  color: var(--co);
+  font-family: var(--fo);
+  overflow-x: hidden;
+}
+nav {
+  background: #fff !important;
+}
+hr {
+  margin-top: 0 !important;
+}
+.n2 {
+  justify-content: center;
+}
+
+.butn {
+  background: #5414e1d4;
+  color: #eee;
+  font-family: var(----font-family-monospace);
+}
+#study-img {
+  height: auto;
+}
+a:hover{
+    font-style: normal;
+    text-decoration: none !important;
+
+}
+
+h6 {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+.list {
+  list-style: none;
+  justify-content: space-around;
+}
+.navbar-nav {
+  justify-content: end;
+}
