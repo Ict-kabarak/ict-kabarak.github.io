@@ -2,7 +2,7 @@
 
 this is a school club lead by:
 
-Bethuel Kipsang @bethropolis
-Peter Yabuna
-Sandra Koech
+Bethuel Kipsang @bethropolis<br>
+Peter Yabuna <br>
+Sandra Koech <br>
 
