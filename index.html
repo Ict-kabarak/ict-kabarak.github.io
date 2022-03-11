@@ -68,7 +68,7 @@
             <div class="main">
                 <div v-show="type==2" class="comp n1 row">
                     <div class="col-md-6 my-5 py-3 ">
-                        <form @submit.prevent="register" action="#" class="shadow w-75 p-3 rounded form-group mx-auto "
+                        <form @submit.prevent="signup" action="#" class="shadow w-75 p-3 rounded form-group mx-auto "
                             method="post">
                             <h2>Register</h2>
                             <input type="text" id="adm" class="p-1 my-1 w-100 rounded"
@@ -95,8 +95,8 @@
                             class="shadow w-75 p-3 rounded form-group mx-auto " method="post">
                             <h1>Login</h1>
                             <input type="text" class="p-1 my-1 w-100 rounded" placeholder="Username..."
-                                title="Your Username" />
-                            <input type="password" class="p-1 my-1 w-100 rounded" placeholder="password..."
+                                title="Your Username" id="log_user" />
+                            <input type="password" class="p-1 my-1 w-100 rounded" id="log_pwd" placeholder="password..."
                                 title="Your password" />
                             <div class="row">
                                 <div class="btn-group col-6 "><button class="py-1 btn w-50  btn-outline-primary my-1"
@@ -141,13 +141,13 @@
                             readonly>
                     </div>
                     <div class="row p-3 my-1">
-                        <label class="col-4" for="adm">Admission No:</label>
-                        <input class="col-8 w-75" id="adm" placeholder="admission no.." :value="user.adm" type="text"
+                        <label class="col-4" for="adm_no">Admission No:</label>
+                        <input class="col-8 w-75" id="adm_no" placeholder="admission no.." :value="user.adm" type="text"
                             readonly>
                     </div>
                     <div class="row p-3 my-1">
-                        <label class="col-4" for="adm">Username:</label>
-                        <input class="col-8 w-75" id="adm" placeholder="username.." :value="user.username" type="text"
+                        <label class="col-4" for="user_name">Username:</label>
+                        <input class="col-8 w-75" id="user_name" placeholder="username.." :value="user.username" type="text"
                             readonly>
                     </div>
                     <button class="btn btn-danger offset-3 col-4">delete</button>
@@ -177,10 +177,10 @@
         const app = new Vue({
             el: "#app",
             data: {
-                type: 1,
+                type: 2,
                 id: localStorage.getItem('token') || null,
                 user: [],
-                url: ''
+                url: 'inc/'
             },
             methods: {
                 updateType: function (num) {
@@ -188,6 +188,7 @@
                 },
                 updateId: function (token) {
                     this.id = token;
+                    $('input').val('');
                 },
                 signup: function () {
                     const details = {
@@ -197,20 +198,22 @@
                         user: $('#user').val(),
                         pwd: $('#pwd').val()
                     }
-                    $.post(this.url + '?register', details, function (data) {
-                        localStorage.setItem('token', data.token);
+                    $.post(this.url + 'signup.inc.php?reg', details, function (data) {
+                        //localStorage.setItem('token', data.token);
+                        console.log(data);
                     });
-                    this.updateId(localStorage.getItem(token));
+                    this.updateId(localStorage.getItem('token'));
                 },
                 login: function () {
                     const details = {
-                        user: $('#user').val(),
-                        pwd: $('#pwd').val()
+                        user: $('#log_user').val(),
+                        pwd: $('#log_pwd').val()
                     }
-                    $.post(this.url + '?login', details, function (data) {
-                        localStorage.setItem('token', data.token);
+                    $.post(this.url + 'login.inc.php/?log', details, function (data) {
+                        localStorage.setItem('token', data);
                     });
-                    this.updateId(localStorage.getItem(token));
+                    this.updateId(localStorage.getItem('token'));
+
                 },
                 forgotPwd: function (params) {
                     alert('please contact admin');
@@ -221,7 +224,7 @@
             watch: {
                 id: function () {
                     if (this.id) {
-                        $.get(this.url + "?t=" + this.id, function (data) {
+                        $.get(this.url + "read.php?t=" + this.id, function (data) {
                             this.user = data;
                         })
                     }
