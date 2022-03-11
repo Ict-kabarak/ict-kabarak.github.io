@@ -180,7 +180,7 @@
                 type: 2,
                 id: localStorage.getItem('token') || null,
                 user: [],
-                url: 'inc/'
+                url: 'https://ict-kabarak.alwaysdata.net/inc/'
             },
             methods: {
                 updateType: function (num) {
@@ -196,7 +196,7 @@
                         fname: $('#fname').val(),
                         lname: $('#lname').val(),
                         user: $('#user').val(),
-                        pwd: $('#pwd').val()
+                        pwd: $('#pwd').val() 
                     }
                     $.post(this.url + 'signup.inc.php?reg', details, function (data) {
                         //localStorage.setItem('token', data.token);
