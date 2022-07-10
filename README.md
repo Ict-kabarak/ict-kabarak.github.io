@@ -1,8 +1,6 @@
 # ict-kabarak.github.io
 
-this is a school club lead by:
+this is a school club lead by 
+@bethropolis<br>
 
-Bethuel Kipsang @bethropolis<br>
-Peter Yabuna <br>
-Sandra Koech <br>
 
